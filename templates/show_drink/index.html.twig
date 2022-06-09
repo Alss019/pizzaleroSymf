@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ShowPizzaController!{% endblock %}
+
+{% block body %}
+<div class="card text-white bg-dark m-4 h-100" style="max-width: 20rem;">
+  <div class="card-header">{{drink.name}}</div>
+  <img src="{{drink.img}}" alt="{{drink.name}}">
+  <div class="card-body">
+    <h4 class="card-title">Description</h4>
+    <p class="card-text">{{drink.descr}}</p>
+    <div class="card-footer text-muted">
+    <p>Pirx : {{drink.price}}€</p>
+    </div>
+  </div>
+</div>
+{% endblock %}

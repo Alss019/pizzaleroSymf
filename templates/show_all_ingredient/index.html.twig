@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ShowPizzaController!{% endblock %}
+
+{% block body %}
+<div class="row row-cols-1 row-cols-md-5 g-4">
+    {% for ingred in ingredient %}
+    <div class="col">
+        <div class="card text-white bg-dark m-4 h-100" style="max-width: 20rem;">
+            <div class="card-header">{{ingred.name}}</div>
+
+            <img src="{{ingred.img}}" alt="{{ingred.name}}">
+
+            <div class="card-body">
+
+                <p>{{ingred.descr}}</p>
+            </div>
+
+            <div class="card-footer">
+
+                <small class="text-muted">
+                <button type="button" class="btn btn-primary" data-bs-target="#staticBackdrop">
+                    <a href="{{path('show_ingredient', {'id':ingred.id})}}">Détail</a></button>
+                </small>
+                
+            </div>
+        </div>
+
+    </div>
+
+{% endfor %}
+</div>
+{% endblock %}

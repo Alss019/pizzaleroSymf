@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ShowPizzaController!{% endblock %}
+
+{% block body %}
+<div class="row row-cols-1 row-cols-md-5 g-4">
+  {% for tab in menu %}
+  <div class="col">
+    <div class="card text-white bg-dark m-4 h-100" style="max-width: 20rem;">
+      <div class="card-header">{{tab.name}}</div>
+
+      <img src="{{tab.img}}" alt="{{tab.name}}">
+
+      <div class="card-body">
+
+        <p>{{tab.descr}}</p>
+      </div>
+
+      <div class="card-footer">
+
+       <small class="text-muted">Prix : {{tab.price}}€
+          <button type="button" class="btn btn-primary" data-bs-target="#staticBackdrop">
+            <a href="{{path('show_menu', {'id':tab.id})}}">Détail</a></button>
+        </small>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+  {% endblock %}

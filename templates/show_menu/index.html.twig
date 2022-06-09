@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ShowPizzaController!{% endblock %}
+
+{% block body %}
+<div class="card text-white bg-dark m-4 h-100" style="max-width: 20rem;">
+  <div class="card-header">{{menu.name}}</div>
+  <img src="{{menu.img}}" alt="{{menu.name}}">
+  <div class="card-body">
+    <h4 class="card-title">Description</h4>
+    <p class="card-text">{{menu.descr}}</p>
+    <ul>
+    {% for tab in menu.pizza %}
+    <li><a href="{{path('show_pizza', {'id':tab.id})}}">{{tab.name}}</a></li>
+    {% endfor %}
+    </ul>
+    <ul>
+    {% for tab in menu.drink %}
+    <li><a href="{{path('show_drink', {'id':tab.id})}}">{{tab.name}}</a></li>
+    {% endfor %}
+    </ul>
+    <div class="card-footer text-muted">
+    <p>Pirx : {{menu.price}}€</p>
+    </div>
+  </div>
+</div>
+{% endblock %}
