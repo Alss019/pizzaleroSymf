@@ -17,6 +17,8 @@ package.json
 phpunit.xml.dist
 symfony.lock
 webpack.config.js
+.env*
+.gitignore
 ###< symfony/framework-bundle ###
 
 ###> phpunit/phpunit ###
