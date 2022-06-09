@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Pizzalero{% endblock %}
+
+{% block body %}
+    <div class="ms-3">
+        <h2 class="">Ajouter pizza</h2>
+        {{ form_start(form) }}
+        <div class="">{{ form_label(form.name) }}</div>
+        <div class="mb-3">{{ form_widget(form.name) }}</div>
+        <div class="">{{ form_label(form.descr) }}</div>
+        <div class="mb-3">{{ form_widget(form.descr) }}</div>
+        <div class="">{{ form_label(form.price) }}</div>
+        <div class="mb-3">{{ form_widget(form.price) }}</div>
+        <div class="">{{ form_label(form.img) }}</div>
+        <div class="mb-3">{{ form_widget(form.img) }}</div>
+        <div class="">{{ form_label(form.qtx_cart) }}</div>
+        <div class="mb-3">{{ form_widget(form.qtx_cart) }}</div>
+        <div class="">{{ form_label(form.qtx_menu) }}</div>
+        <div class="mb-3">{{ form_widget(form.qtx_menu) }}</div>
+        <div class="">{{ form_label(form.carts) }}</div>
+        <div class="mb-3">{{ form_widget(form.carts) }}</div>
+        <div class="">{{ form_label(form.menus) }}</div>
+        <div class="mb-3">{{ form_widget(form.menus) }}</div>
+        <div class="">{{ form_label(form.ingredient) }}</div>
+        <div class="mb-3">{{ form_widget(form.ingredient) }}</div>
+        {{ form_rest(form) }}
+        <button class="btn btn-primary" type="submit">Ajouter</button>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
