@@ -40,9 +40,9 @@ class AdminController extends AbstractDashboardController
     {
         yield MenuItem::linkToRoute('Retour à l\'accueil', 'fa fa-home', 'app_accueil');
         yield MenuItem::linkToCrud('Boissons', 'fas fa-beer', Drink::class);
-        yield MenuItem::linkToCrud('Ingrédients', 'fas fa-cutlery', Ingredient::class);
+        yield MenuItem::linkToCrud('Ingrédients', 'fas fa-wheat-awn', Ingredient::class);
         yield MenuItem::linkToCrud('Menu', 'fas fa-bars', Menu::class);
-        yield MenuItem::linkToCrud('Pizza', 'fas fa-pie-chart', Pizza::class);
+        yield MenuItem::linkToCrud('Pizza', 'fas fa-pizza-slice', Pizza::class);
         yield MenuItem::linkToCrud('User', 'fas fa-users', User::class);
         yield MenuItem::linkToCrud('Cart', 'fas fa-shopping-basket', Cart::class);
     }
