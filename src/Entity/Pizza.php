@@ -15,16 +15,16 @@ class Pizza
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'string', length: 50)]
+    #[ORM\Column(type: 'string', length: 50, nullable:true)]
     private $name_pizza;
 
-    #[ORM\Column(type: 'text')]
+    #[ORM\Column(type: 'text',nullable:true)]
     private $desc_pizza;
 
-    #[ORM\Column(type: 'float')]
+    #[ORM\Column(type: 'float', nullable:true)]
     private $price_pizza;
 
-    #[ORM\Column(type: 'string', length: 50)]
+    #[ORM\Column(type: 'string', length: 50, nullable:true)]
     private $img_pizza;
 
     #[ORM\ManyToMany(targetEntity: Ingredient::class, inversedBy: 'pizzas')]
@@ -166,5 +166,9 @@ class Pizza
         $this->cart->removeElement($cart);
 
         return $this;
+    }
+    public function __toString()
+    {
+        return $this->name_pizza;
     }
 }

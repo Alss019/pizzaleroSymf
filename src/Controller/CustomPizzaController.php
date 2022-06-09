@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Controller;
-
+use App\Entity\Pizza;
+use App\Repository\PizzaRepository;
 use App\Repository\IngredientRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,7 +14,7 @@ class CustomPizzaController extends AbstractController
     public function index(IngredientRepository $ingredientRepository): Response
     {
         $ing = $ingredientRepository->findAll();
-        return $this->render('custom_pizza/index.html.twig', ['ings'=>$ing]);
+        return $this->render('custom_pizza_form/index.html.twig', ['ings'=>$ing]);
     ;}
 
     #[Route('/custom/pizza/{id}', name: 'app_custom_pizza1')]
@@ -27,8 +28,8 @@ class CustomPizzaController extends AbstractController
             'ing'=>$ing,
             'tab'=>$tab
         ]);
-        dd($tab);
     }
 }
+
 
 
