@@ -16,7 +16,6 @@ class IngredientType extends AbstractType
             ->add('descr')
             ->add('img')
             ->add('qtx')
-            ->add('pizzas')
         ;
     }
 

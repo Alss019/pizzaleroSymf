@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Drink;
+
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -18,8 +19,8 @@ class DrinkType extends AbstractType
             ->add('img')
             ->add('qtx_cart')
             ->add('qtx_menu')
-            ->add('carts')
-            ->add('menus')
+
+
         ;
     }
 

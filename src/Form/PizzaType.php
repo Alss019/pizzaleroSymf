@@ -18,9 +18,7 @@ class PizzaType extends AbstractType
             ->add('img')
             ->add('qtx_cart')
             ->add('qtx_menu')
-            ->add('carts')
-            ->add('menus')
-            ->add('ingredient')
+
         ;
     }
 
