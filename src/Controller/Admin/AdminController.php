@@ -39,11 +39,11 @@ class AdminController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToRoute('Retour à l\'accueil', 'fa fa-home', 'app_accueil');
-        yield MenuItem::linkToCrud('Boissons', 'fas fa-list', Drink::class);
-        yield MenuItem::linkToCrud('Ingrédients', 'fas fa-users', Ingredient::class);
-        yield MenuItem::linkToCrud('Menu', 'fas fa-newspaper', Menu::class);
-        yield MenuItem::linkToCrud('Pizza', 'fas fa-newspaper', Pizza::class);
-        yield MenuItem::linkToCrud('User', 'fas fa-newspaper', User::class);
-        yield MenuItem::linkToCrud('Cart', 'fas fa-newspaper', Cart::class);
+        yield MenuItem::linkToCrud('Boissons', 'fas fa-beer', Drink::class);
+        yield MenuItem::linkToCrud('Ingrédients', 'fas fa-cutlery', Ingredient::class);
+        yield MenuItem::linkToCrud('Menu', 'fas fa-bars', Menu::class);
+        yield MenuItem::linkToCrud('Pizza', 'fas fa-pie-chart', Pizza::class);
+        yield MenuItem::linkToCrud('User', 'fas fa-users', User::class);
+        yield MenuItem::linkToCrud('Cart', 'fas fa-shopping-basket', Cart::class);
     }
 }
