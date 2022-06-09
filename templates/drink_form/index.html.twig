@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello DrinkFormController!{% endblock %}
+
+{% block body %}
+{{ form_start(form) }}
+
+{{ form_label(form.name) }}
+{{ form_widget(form.name) }}
+
+{{ form_label(form.price) }}
+{{ form_widget(form.price) }}
+
+{{ form_label(form.descr) }}
+{{ form_widget(form.descr) }}
+
+{{ form_label(form.img) }}
+{{ form_widget(form.img) }}
+
+{{ form_rest(form) }}
+<button type="submit">Enregistrer</button>
+{{ form_end(form) }}
+{% endblock %}
