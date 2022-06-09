@@ -15,35 +15,32 @@ class Menu
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'string', length: 50, nullable: true)]
-    private $name;
+    #[ORM\Column(type: 'string', length: 50)]
+    private $name_menu;
 
-    #[ORM\Column(type: 'text', nullable: true)]
-    private $descr;
+    #[ORM\Column(type: 'text')]
+    private $desc_menu;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $img;
+    #[ORM\Column(type: 'string', length: 50)]
+    private $img_menu;
 
-    #[ORM\Column(type: 'float', nullable: true)]
-    private $price;
+    #[ORM\Column(type: 'float')]
+    private $price_menu;
 
-    #[ORM\Column(type: 'integer', nullable: true)]
-    private $qtx;
-
-    #[ORM\ManyToMany(targetEntity: Cart::class, mappedBy: 'menu')]
-    private $carts;
-
-    #[ORM\ManyToMany(targetEntity: Pizza::class, inversedBy: 'menus')]
-    private $pizza;
+    #[ORM\ManyToMany(targetEntity: Pizza::class, mappedBy: 'menu')]
+    private $pizzas;
 
     #[ORM\ManyToMany(targetEntity: Drink::class, inversedBy: 'menus')]
     private $drink;
 
+    #[ORM\ManyToMany(targetEntity: Cart::class, inversedBy: 'menus')]
+    private $cart;
+
     public function __construct()
     {
-        $this->carts = new ArrayCollection();
-        $this->pizza = new ArrayCollection();
+        $this->pizzas = new ArrayCollection();
         $this->drink = new ArrayCollection();
+        $this->cart = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -51,89 +48,50 @@ class Menu
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getNameMenu(): ?string
     {
-        return $this->name;
+        return $this->name_menu;
     }
 
-    public function setName(?string $name): self
+    public function setNameMenu(string $name_menu): self
     {
-        $this->name = $name;
+        $this->name_menu = $name_menu;
 
         return $this;
     }
 
-    public function getDescr(): ?string
+    public function getDescMenu(): ?string
     {
-        return $this->descr;
+        return $this->desc_menu;
     }
 
-    public function setDescr(?string $descr): self
+    public function setDescMenu(string $desc_menu): self
     {
-        $this->descr = $descr;
+        $this->desc_menu = $desc_menu;
 
         return $this;
     }
 
-    public function getImg(): ?string
+    public function getImgMenu(): ?string
     {
-        return $this->img;
+        return $this->img_menu;
     }
 
-    public function setImg(?string $img): self
+    public function setImgMenu(string $img_menu): self
     {
-        $this->img = $img;
+        $this->img_menu = $img_menu;
 
         return $this;
     }
 
-    public function getPrice(): ?float
+    public function getPriceMenu(): ?float
     {
-        return $this->price;
+        return $this->price_menu;
     }
 
-    public function setPrice(?float $price): self
+    public function setPriceMenu(float $price_menu): self
     {
-        $this->price = $price;
-
-        return $this;
-    }
-
-    public function getQtx(): ?int
-    {
-        return $this->qtx;
-    }
-
-    public function setQtx(?int $qtx): self
-    {
-        $this->qtx = $qtx;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Cart>
-     */
-    public function getCarts(): Collection
-    {
-        return $this->carts;
-    }
-
-    public function addCart(Cart $cart): self
-    {
-        if (!$this->carts->contains($cart)) {
-            $this->carts[] = $cart;
-            $cart->addMenu($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCart(Cart $cart): self
-    {
-        if ($this->carts->removeElement($cart)) {
-            $cart->removeMenu($this);
-        }
+        $this->price_menu = $price_menu;
 
         return $this;
     }
@@ -141,15 +99,16 @@ class Menu
     /**
      * @return Collection<int, Pizza>
      */
-    public function getPizza(): Collection
+    public function getPizzas(): Collection
     {
-        return $this->pizza;
+        return $this->pizzas;
     }
 
     public function addPizza(Pizza $pizza): self
     {
-        if (!$this->pizza->contains($pizza)) {
-            $this->pizza[] = $pizza;
+        if (!$this->pizzas->contains($pizza)) {
+            $this->pizzas[] = $pizza;
+            $pizza->addMenu($this);
         }
 
         return $this;
@@ -157,13 +116,15 @@ class Menu
 
     public function removePizza(Pizza $pizza): self
     {
-        $this->pizza->removeElement($pizza);
+        if ($this->pizzas->removeElement($pizza)) {
+            $pizza->removeMenu($this);
+        }
 
         return $this;
     }
 
     /**
-     * @return Collection<int, Drink>
+     * @return Collection<int, drink>
      */
     public function getDrink(): Collection
     {
@@ -182,6 +143,30 @@ class Menu
     public function removeDrink(Drink $drink): self
     {
         $this->drink->removeElement($drink);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, cart>
+     */
+    public function getCart(): Collection
+    {
+        return $this->cart;
+    }
+
+    public function addCart(Cart $cart): self
+    {
+        if (!$this->cart->contains($cart)) {
+            $this->cart[] = $cart;
+        }
+
+        return $this;
+    }
+
+    public function removeCart(Cart $cart): self
+    {
+        $this->cart->removeElement($cart);
 
         return $this;
     }

@@ -15,26 +15,26 @@ class Cart
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'datetime_immutable', nullable: true)]
+    #[ORM\Column(type: 'datetime_immutable')]
     private $date_cart;
 
+    #[ORM\ManyToMany(targetEntity: Pizza::class, mappedBy: 'cart')]
+    private $pizzas;
+
+    #[ORM\ManyToMany(targetEntity: Menu::class, mappedBy: 'cart')]
+    private $menus;
+
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'carts')]
-    private $util;
+    private $user;
 
     #[ORM\ManyToMany(targetEntity: Drink::class, inversedBy: 'carts')]
     private $drink;
 
-    #[ORM\ManyToMany(targetEntity: Menu::class, inversedBy: 'carts')]
-    private $menu;
-
-    #[ORM\ManyToMany(targetEntity: Pizza::class, inversedBy: 'carts')]
-    private $pizza;
-
     public function __construct()
     {
+        $this->pizzas = new ArrayCollection();
+        $this->menus = new ArrayCollection();
         $this->drink = new ArrayCollection();
-        $this->menu = new ArrayCollection();
-        $this->pizza = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -47,27 +47,81 @@ class Cart
         return $this->date_cart;
     }
 
-    public function setDateCart(?\DateTimeImmutable $date_cart): self
+    public function setDateCart(\DateTimeImmutable $date_cart): self
     {
         $this->date_cart = $date_cart;
 
         return $this;
     }
 
-    public function getUtil(): ?User
+    /**
+     * @return Collection<int, Pizza>
+     */
+    public function getPizzas(): Collection
     {
-        return $this->util;
+        return $this->pizzas;
     }
 
-    public function setUtil(?User $util): self
+    public function addPizza(Pizza $pizza): self
     {
-        $this->util = $util;
+        if (!$this->pizzas->contains($pizza)) {
+            $this->pizzas[] = $pizza;
+            $pizza->addCart($this);
+        }
+
+        return $this;
+    }
+
+    public function removePizza(Pizza $pizza): self
+    {
+        if ($this->pizzas->removeElement($pizza)) {
+            $pizza->removeCart($this);
+        }
 
         return $this;
     }
 
     /**
-     * @return Collection<int, Drink>
+     * @return Collection<int, Menu>
+     */
+    public function getMenus(): Collection
+    {
+        return $this->menus;
+    }
+
+    public function addMenu(Menu $menu): self
+    {
+        if (!$this->menus->contains($menu)) {
+            $this->menus[] = $menu;
+            $menu->addCart($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMenu(Menu $menu): self
+    {
+        if ($this->menus->removeElement($menu)) {
+            $menu->removeCart($this);
+        }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, drink>
      */
     public function getDrink(): Collection
     {
@@ -86,54 +140,6 @@ class Cart
     public function removeDrink(Drink $drink): self
     {
         $this->drink->removeElement($drink);
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Menu>
-     */
-    public function getMenu(): Collection
-    {
-        return $this->menu;
-    }
-
-    public function addMenu(Menu $menu): self
-    {
-        if (!$this->menu->contains($menu)) {
-            $this->menu[] = $menu;
-        }
-
-        return $this;
-    }
-
-    public function removeMenu(Menu $menu): self
-    {
-        $this->menu->removeElement($menu);
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Pizza>
-     */
-    public function getPizza(): Collection
-    {
-        return $this->pizza;
-    }
-
-    public function addPizza(Pizza $pizza): self
-    {
-        if (!$this->pizza->contains($pizza)) {
-            $this->pizza[] = $pizza;
-        }
-
-        return $this;
-    }
-
-    public function removePizza(Pizza $pizza): self
-    {
-        $this->pizza->removeElement($pizza);
 
         return $this;
     }

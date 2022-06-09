@@ -15,34 +15,28 @@ class Drink
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'string', length: 50, nullable: true)]
-    private $name;
+    #[ORM\Column(type: 'string', length: 50)]
+    private $name_drink;
 
-    #[ORM\Column(type: 'float', nullable: true)]
-    private $price;
+    #[ORM\Column(type: 'float')]
+    private $price_drink;
 
-    #[ORM\Column(type: 'text', nullable: true)]
-    private $descr;
+    #[ORM\Column(type: 'text')]
+    private $desc_drink;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $img;
-
-    #[ORM\Column(type: 'integer', nullable: true)]
-    private $qtx_cart;
-
-    #[ORM\Column(type: 'integer', nullable: true)]
-    private $qtx_menu;
-
-    #[ORM\ManyToMany(targetEntity: Cart::class, mappedBy: 'drink')]
-    private $carts;
+    #[ORM\Column(type: 'string', length: 255)]
+    private $img_drink;
 
     #[ORM\ManyToMany(targetEntity: Menu::class, mappedBy: 'drink')]
     private $menus;
 
+    #[ORM\ManyToMany(targetEntity: Cart::class, mappedBy: 'drink')]
+    private $carts;
+
     public function __construct()
     {
-        $this->carts = new ArrayCollection();
         $this->menus = new ArrayCollection();
+        $this->carts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -50,101 +44,50 @@ class Drink
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getNameDrink(): ?string
     {
-        return $this->name;
+        return $this->name_drink;
     }
 
-    public function setName(?string $name): self
+    public function setNameDrink(string $name_drink): self
     {
-        $this->name = $name;
+        $this->name_drink = $name_drink;
 
         return $this;
     }
 
-    public function getPrice(): ?float
+    public function getPriceDrink(): ?float
     {
-        return $this->price;
+        return $this->price_drink;
     }
 
-    public function setPrice(?float $price): self
+    public function setPriceDrink(float $price_drink): self
     {
-        $this->price = $price;
+        $this->price_drink = $price_drink;
 
         return $this;
     }
 
-    public function getDescr(): ?string
+    public function getDescDrink(): ?string
     {
-        return $this->descr;
+        return $this->desc_drink;
     }
 
-    public function setDescr(?string $descr): self
+    public function setDescDrink(string $desc_drink): self
     {
-        $this->descr = $descr;
+        $this->desc_drink = $desc_drink;
 
         return $this;
     }
 
-    public function getImg(): ?string
+    public function getImgDrink(): ?string
     {
-        return $this->img;
+        return $this->img_drink;
     }
 
-    public function setImg(?string $img): self
+    public function setImgDrink(string $img_drink): self
     {
-        $this->img = $img;
-
-        return $this;
-    }
-
-    public function getQtxCart(): ?int
-    {
-        return $this->qtx_cart;
-    }
-
-    public function setQtxCart(?int $qtx_cart): self
-    {
-        $this->qtx_cart = $qtx_cart;
-
-        return $this;
-    }
-
-    public function getQtxMenu(): ?int
-    {
-        return $this->qtx_menu;
-    }
-
-    public function setQtxMenu(?int $qtx_menu): self
-    {
-        $this->qtx_menu = $qtx_menu;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Cart>
-     */
-    public function getCarts(): Collection
-    {
-        return $this->carts;
-    }
-
-    public function addCart(Cart $cart): self
-    {
-        if (!$this->carts->contains($cart)) {
-            $this->carts[] = $cart;
-            $cart->addDrink($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCart(Cart $cart): self
-    {
-        if ($this->carts->removeElement($cart)) {
-            $cart->removeDrink($this);
-        }
+        $this->img_drink = $img_drink;
 
         return $this;
     }
@@ -171,6 +114,33 @@ class Drink
     {
         if ($this->menus->removeElement($menu)) {
             $menu->removeDrink($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Cart>
+     */
+    public function getCarts(): Collection
+    {
+        return $this->carts;
+    }
+
+    public function addCart(Cart $cart): self
+    {
+        if (!$this->carts->contains($cart)) {
+            $this->carts[] = $cart;
+            $cart->addDrink($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCart(Cart $cart): self
+    {
+        if ($this->carts->removeElement($cart)) {
+            $cart->removeDrink($this);
         }
 
         return $this;

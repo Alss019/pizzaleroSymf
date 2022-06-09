@@ -15,17 +15,14 @@ class Ingredient
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'string', length: 50, nullable: true)]
-    private $name;
+    #[ORM\Column(type: 'string', length: 50)]
+    private $name_ingredient;
 
-    #[ORM\Column(type: 'text', nullable: true)]
-    private $descr;
+    #[ORM\Column(type: 'text')]
+    private $desc_ingredient;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $img;
-
-    #[ORM\Column(type: 'integer', nullable: true)]
-    private $qtx;
+    #[ORM\Column(type: 'string', length: 50)]
+    private $img_ingredient;
 
     #[ORM\ManyToMany(targetEntity: Pizza::class, mappedBy: 'ingredient')]
     private $pizzas;
@@ -40,50 +37,38 @@ class Ingredient
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getNameIngredient(): ?string
     {
-        return $this->name;
+        return $this->name_ingredient;
     }
 
-    public function setName(?string $name): self
+    public function setNameIngredient(string $name_ingredient): self
     {
-        $this->name = $name;
+        $this->name_ingredient = $name_ingredient;
 
         return $this;
     }
 
-    public function getDescr(): ?string
+    public function getDescIngredient(): ?string
     {
-        return $this->descr;
+        return $this->desc_ingredient;
     }
 
-    public function setDescr(?string $descr): self
+    public function setDescIngredient(string $desc_ingredient): self
     {
-        $this->descr = $descr;
+        $this->desc_ingredient = $desc_ingredient;
 
         return $this;
     }
 
-    public function getImg(): ?string
+    public function getImgIngredient(): ?string
     {
-        return $this->img;
+        return $this->img_ingredient;
     }
 
-    public function setImg(?string $img): self
+    public function setImgIngredient(string $img_ingredient): self
     {
-        $this->img = $img;
-
-        return $this;
-    }
-
-    public function getQtx(): ?int
-    {
-        return $this->qtx;
-    }
-
-    public function setQtx(?int $qtx): self
-    {
-        $this->qtx = $qtx;
+        $this->img_ingredient = $img_ingredient;
 
         return $this;
     }

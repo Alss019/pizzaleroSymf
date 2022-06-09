@@ -8,7 +8,6 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-#[ORM\Table(name: '`user`')]
 class User
 {
     #[ORM\Id]
@@ -16,19 +15,19 @@ class User
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'string', length: 50, nullable: true)]
-    private $name;
+    #[ORM\Column(type: 'string', length: 50)]
+    private $name_user;
 
     #[ORM\Column(type: 'string', length: 50)]
-    private $firstname;
+    private $first_name_user;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $mail;
+    #[ORM\Column(type: 'string', length: 50)]
+    private $mail_user;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $password;
+    #[ORM\Column(type: 'string', length: 255)]
+    private $password_user;
 
-    #[ORM\OneToMany(mappedBy: 'util', targetEntity: Cart::class)]
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Cart::class)]
     private $carts;
 
     public function __construct()
@@ -41,50 +40,50 @@ class User
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getNameUser(): ?string
     {
-        return $this->name;
+        return $this->name_user;
     }
 
-    public function setName(?string $name): self
+    public function setNameUser(string $name_user): self
     {
-        $this->name = $name;
+        $this->name_user = $name_user;
 
         return $this;
     }
 
-    public function getFirstname(): ?string
+    public function getFirstNameUser(): ?string
     {
-        return $this->firstname;
+        return $this->first_name_user;
     }
 
-    public function setFirstname(string $firstname): self
+    public function setFirstNameUser(string $first_name_user): self
     {
-        $this->firstname = $firstname;
+        $this->first_name_user = $first_name_user;
 
         return $this;
     }
 
-    public function getMail(): ?string
+    public function getMailUser(): ?string
     {
-        return $this->mail;
+        return $this->mail_user;
     }
 
-    public function setMail(?string $mail): self
+    public function setMailUser(string $mail_user): self
     {
-        $this->mail = $mail;
+        $this->mail_user = $mail_user;
 
         return $this;
     }
 
-    public function getPassword(): ?string
+    public function getPasswordUser(): ?string
     {
-        return $this->password;
+        return $this->password_user;
     }
 
-    public function setPassword(?string $password): self
+    public function setPasswordUser(string $password_user): self
     {
-        $this->password = $password;
+        $this->password_user = $password_user;
 
         return $this;
     }
@@ -101,7 +100,7 @@ class User
     {
         if (!$this->carts->contains($cart)) {
             $this->carts[] = $cart;
-            $cart->setUtil($this);
+            $cart->setUser($this);
         }
 
         return $this;
@@ -111,8 +110,8 @@ class User
     {
         if ($this->carts->removeElement($cart)) {
             // set the owning side to null (unless already changed)
-            if ($cart->getUtil() === $this) {
-                $cart->setUtil(null);
+            if ($cart->getUser() === $this) {
+                $cart->setUser(null);
             }
         }
 
